@@ -1,0 +1,26 @@
+{
+  "name": "codejam-dom-palette",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linobanana/codejam-dom-palette.git"
+  },
+  "author": "Anhelina Lakhtanava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linobanana/codejam-dom-palette/issues"
+  },
+  "homepage": "https://github.com/linobanana/codejam-dom-palette#readme",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "parcel-bundler": "^1.12.4"
+  }
+}
