@@ -1,0 +1,96 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: calc(100vh - 50px);
+  align-items: center;
+}
+
+.page-header {
+  height: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+  flex-basis: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  .menu {
+    display: flex;
+    align-items: center;
+    .btn {
+      @include flex-center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+    .project-name {
+      margin: 0 0 0 10px;
+      font-weight: bold;
+    }
+  }
+  .settings {
+    .btn {
+      @include flex-center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.toolbars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 10px;
+  height: 100%;
+  .card-text {
+    opacity: 0.55;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    .fas {
+      margin-right: 20px;
+    }
+  }
+  .far {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-right: 20px;
+  }
+  .circle1 {
+    background-color: green;
+  }
+  .circle2 {
+    background-color: grey;
+  }
+  .circle3 {
+    background-color: red;
+  }
+  .circle4 {
+    background-color: blue;
+  }
+  .card-body > p {
+    cursor: pointer;
+  }
+}
+
+#canvas {
+  margin-right: 20px;
+}
