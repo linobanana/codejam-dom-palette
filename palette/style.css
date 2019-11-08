@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: calc(100vh - 50px);
+  align-items: center;
+}
+
+.page-header {
+  height: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
+  flex-basis: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.project-name {
+  margin: 0 0 0 10px;
+  font-weight: bold;
+}
+
+.toolbars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 10px;
+  height: 100%;
+}
+
+.card-text {
+  opacity: 0.55;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#colors .card-text {
+  opacity: 1;
+}
+
+.fas {
+  margin-right: 20px;
+}
+
+.far {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+
+.currentColor, .prevColor, .defaultBlue, .defaultRed {
+  border: 1px solid #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.currentColor {
+  background-color: green;
+}
+.prevColor {
+  background-color: grey;
+}
+.defaultRed {
+  background-color: red;
+}
+.defaultBlue {
+  background-color: blue;
+}
+.card-body > p {
+  cursor: pointer;
+}
+
+#canvas {
+  margin-right: 20px;
+}
+
+.active-tool {
+  opacity: 1;
+  background-color: #f4f0f0;
+}

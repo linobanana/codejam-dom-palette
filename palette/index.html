@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>CodeJam Palette</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="./palette/style.css">
+  <link rel="stylesheet" href="./style.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/ea3394bf9a.js" crossorigin="anonymous"></script>
 </head>
@@ -24,25 +24,25 @@
     <section class="toolbars">
       <div class="card" style="width: 13rem;">
         <div class="card-body" id="tools">
-          <p class="card-text bucket"><i class="fas fa-fill-drip"></i>Paint bucket</p>
+          <p class="card-text bucket"><i class="fas fa-fill-drip"></i>Fill bucket</p>
           <p class="card-text picker"><i class="fas fa-eye-dropper"></i>Choose color</p>
           <hr>
-          <p class="card-text move-tool"><i class="fas fa-arrows-alt"></i>Move</p>
+          <p class="card-text pencil"><i class="fas fa-pencil-alt"></i>Pencil</p>
           <p class="card-text transform-tool"><i class="fas fa-exchange-alt"></i>Transform</p>
         </div>
       </div>
       <div class="card" style="width: 13rem;">
         <div class="card-body" id="colors">
-          <p class="card-text current"><i class="far fa-circle circle1"></i>Current color</p>
-          <p class="card-text prev"><i class="far fa-circle circle2"></i>Prev color</p>
+          <p class="card-text"><span class="currentColor"></span>Current color</p>
+          <p class="card-text"><span class="prevColor"></span>Prev color</p>
           <hr>
-          <p class="card-text basic1"><i class="far fa-circle circle3"></i>red</p>
-          <p class="card-text basic2"><i class="far fa-circle circle4"></i>blue</p>
+          <p class="card-text"><span class="defaultRed"></span>red</p>
+          <p class="card-text"><span class="defaultBlue"></span>blue</p>
         </div>
       </div>
     </section>
-    <canvas width="660" height="660" id="canvas"></canvas>
+    <canvas width="512" height="512" id="canvas"></canvas>
   </div>
-    <script src="./palette/main.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
   </body>
 </html>
