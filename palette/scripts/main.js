@@ -27,18 +27,26 @@ class Canvas {
     return result;
   }
 
+  defaultFill() {
+    this.ctx.fillStyle = '#FFFFFF';
+    this.ctx.fillRect(0, 0, this.canvas.height, this.canvas.width);
+  }
+
   getClickPosition(event) {
     const rect = this.canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left; 
+    const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    return {x: x, y: y};
+    return {
+      x: x,
+      y: y,
+    };
   }
 
   findCanvasSector(map, x, y) {
     let axisX;
     let axisY;
-    for (let i = 0; i < 1; i++) {
-      for (let j = 0; j < this.numberOfLevels; j++) {
+    for (let i = 0; i < 1; i += 1) {
+      for (let j = 0; j < this.numberOfLevels; j += 1) {
         if (x > 512) {
           return;
         } else {
@@ -50,8 +58,8 @@ class Canvas {
         }
       }
     }
-    for (let i = 0; i < this.numberOfLevels; i++) {
-      for (let j = axisX; j < axisX + 1; j++) {
+    for (let i = 0; i < this.numberOfLevels; i += 1) {
+      for (let j = axisX; j < axisX + 1; j += 1) {
         if (y > 512) {
           return;
         } else {
@@ -70,16 +78,73 @@ class Canvas {
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x, y, this.cellSize, this.cellSize);
   }
+
+  colorOfCanvasPixel(x, y) {
+    let data = this.ctx.getImageData(x, y, 1, 1).data;
+    return "#" + ("000000" + rgbToHex(data[0], data[1], data[2])).slice(-6);
+  }
+}
+
+function rgbToHex(r, g, b) {
+  if (r > 255 || g > 255 || b > 255)
+      throw "Invalid color component";
+  return ((r << 16) | (g << 8) | b).toString(16);
+}
+
+function hex(rgbString) {
+  const arr = rgbString.split(',');
+  const r = Number(arr[0].substring(4));
+  const g = Number(arr[1]);
+  const b = Number(arr[2].slice(1, -1));
+  return "#" + ("000000" + rgbToHex(r, g, b)).slice(-6);
 }
 
 const canvas = new Canvas(128);
+canvas.defaultFill();
 const map = canvas.createMap();
+let activeTool;
+let currentColor = document.getElementById('current-color');
+let prevColor = document.querySelector('.prevColor');
 
-canvas.canvas.addEventListener('mousedown', function(e) {
-  let a = canvas.getClickPosition(e);
-  let j = canvas.findCanvasSector(map, a.x, a.y);
-  let k = canvas.fillSector(map[j[0]][j[1]].x, map[j[0]][j[1]].y, '#000');
+function setCurrentColor(newColorInHex) {
+  prevColor.style.backgroundColor = currentColor.value;
+  currentColor.value = newColorInHex;
+}
+
+document.getElementById('tools').addEventListener('click', () => {
+  document.getElementById('tools').querySelectorAll('p').forEach(item => item.classList.toggle('active-tool', false));
+  event.target.classList.toggle('active-tool');
+  activeTool = event.target.classList[1];
+  if (activeTool === 'picker') {
+    document.getElementById('colors').querySelectorAll('p').forEach(item => item.classList.toggle('active-colors', true));
+  } else {
+    document.getElementById('colors').querySelectorAll('p').forEach(item => item.classList.toggle('active-colors', false));
+  }
 });
 
-let currentColor = window.getComputedStyle(document.querySelector('.currentColor')).backgroundColor;
-console.log(currentColor);
+document.getElementById('canvas').addEventListener('click', (e) => {
+  let coordinates = canvas.getClickPosition(e);
+  if (activeTool === 'bucket') {
+    let sector = canvas.findCanvasSector(map, coordinates.x, coordinates.y);
+    canvas.fillSector(map[sector[0]][sector[1]].x, map[sector[0]][sector[1]].y, currentColor.value);
+  }
+  if (activeTool === 'picker') {
+    setCurrentColor(canvas.colorOfCanvasPixel(coordinates.x, coordinates.y));
+  }
+});
+
+document.getElementById('colors').addEventListener('click', (event) => {
+  if (activeTool === 'picker') {
+    if (event.target.id === 'current-color') {
+      prevColor.style.backgroundColor = currentColor.value;
+    } else if (event.target.classList[1] === 'second') {
+      setCurrentColor(hex(prevColor.style.backgroundColor));
+    } else if (event.target.classList[1] === 'third') {
+      setCurrentColor('#CD0000');
+    } else if (event.target.classList[1] === 'fourth') {
+      setCurrentColor('#0000ff');
+    }
+  } else if (activeTool !== 'picker' && event.target.id === 'current-color') {
+    event.preventDefault();
+  }
+});
