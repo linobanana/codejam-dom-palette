@@ -111,6 +111,16 @@ function setCurrentColor(newColorInHex) {
   currentColor.value = newColorInHex;
 }
 
+function setActiveTool (name) {
+  document.getElementById('tools').querySelectorAll('p').forEach(item => item.classList.toggle('active-tool', false));
+  document.querySelector(`.${name}`).classList.toggle('active-tool');
+  if (name === 'picker') {
+    document.getElementById('colors').querySelectorAll('p').forEach(item => item.classList.toggle('active-colors', true));
+  } else {
+    document.getElementById('colors').querySelectorAll('p').forEach(item => item.classList.toggle('active-colors', false));
+  }
+}
+
 document.getElementById('tools').addEventListener('click', () => {
   document.getElementById('tools').querySelectorAll('p').forEach(item => item.classList.toggle('active-tool', false));
   event.target.classList.toggle('active-tool');
@@ -137,14 +147,36 @@ document.getElementById('colors').addEventListener('click', (event) => {
   if (activeTool === 'picker') {
     if (event.target.id === 'current-color') {
       prevColor.style.backgroundColor = currentColor.value;
-    } else if (event.target.classList[1] === 'second') {
-      setCurrentColor(hex(prevColor.style.backgroundColor));
-    } else if (event.target.classList[1] === 'third') {
-      setCurrentColor('#CD0000');
-    } else if (event.target.classList[1] === 'fourth') {
-      setCurrentColor('#0000ff');
+    } 
+    switch (event.target.classList[1]) {
+      case 'second':
+        setCurrentColor(hex(prevColor.style.backgroundColor));
+        break;
+      case 'third':
+        setCurrentColor('#CD0000');
+        break;
+      case 'fourth':
+        setCurrentColor('#0000ff');
+        break;
     }
   } else if (activeTool !== 'picker' && event.target.id === 'current-color') {
     event.preventDefault();
+  }
+});
+
+document.addEventListener('keydown', () => {
+  switch(event.keyCode) {
+    case 66:
+      activeTool = 'bucket';
+      setActiveTool(activeTool);
+      break;
+    case 67:
+      activeTool = 'picker';
+      setActiveTool(activeTool);
+      break;
+    case 80:
+      activeTool = 'pencil';
+      setActiveTool(activeTool);
+      break;
   }
 });
