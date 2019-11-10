@@ -9,6 +9,26 @@ const currentColor = document.getElementById('current-color');
 const prevColor = document.querySelector('.prevColor');
 let started = false;
 
+window.addEventListener('DOMContentLoaded', () => {
+  activeTool = localStorage.tool || 'pencil';
+  setActiveTool(activeTool);
+  currentColor.value = localStorage.currColor || '#008000';
+  prevColor.style.backgroundColor = localStorage.preColor || '#808080';
+  let dataURL = localStorage.getItem('canvasImg');
+  let img = new Image;
+  img.src = dataURL;
+  img.onload = function () {
+      canvas.ctx.drawImage(img, 0, 0);
+  };
+});
+
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('tool', activeTool);
+  localStorage.setItem('currColor', currentColor.value);
+  localStorage.setItem('preColor', hex(prevColor.style.backgroundColor));
+  localStorage.setItem('canvasImg', canvas.canvas.toDataURL());
+});
+
 document.getElementById('tools').addEventListener('click', (event) => {
   document.getElementById('tools').querySelectorAll('p').forEach((item) => (item.classList.toggle('active-tool', false)));
   event.target.classList.toggle('active-tool');
