@@ -1,12 +1,10 @@
-import { Canvas } from './canvas.js';
-import { hex, setCurrentColor, setActiveTool } from './colors.js';
+import { Canvas } from './canvas';
+import { hex, setCurrentColor, setActiveTool, currentColor, prevColor } from './colors';
 
 const canvas = new Canvas();
 canvas.defaultFill();
 const map = canvas.createMap();
 let activeTool;
-const currentColor = document.getElementById('current-color');
-const prevColor = document.querySelector('.prevColor');
 let started = false;
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -14,11 +12,11 @@ window.addEventListener('DOMContentLoaded', () => {
   setActiveTool(activeTool);
   currentColor.value = localStorage.currColor || '#008000';
   prevColor.style.backgroundColor = localStorage.preColor || '#808080';
-  let dataURL = localStorage.getItem('canvasImg');
-  let img = new Image;
+  const dataURL = localStorage.getItem('canvasImg');
+  const img = new Image();
   img.src = dataURL;
-  img.onload = function () {
-      canvas.ctx.drawImage(img, 0, 0);
+  img.onload = () => {
+    canvas.ctx.drawImage(img, 0, 0);
   };
 });
 
@@ -32,7 +30,9 @@ window.addEventListener('beforeunload', () => {
 document.getElementById('tools').addEventListener('click', (event) => {
   document.getElementById('tools').querySelectorAll('p').forEach((item) => (item.classList.toggle('active-tool', false)));
   event.target.classList.toggle('active-tool');
-  activeTool = event.target.classList[1];
+  const classList = event.target.classList;
+  const [, toolName, ] = classList;
+  activeTool = toolName;
   if (activeTool === 'picker') {
     document.getElementById('colors').querySelectorAll('p').forEach((item) => (item.classList.toggle('active-colors', true)));
   } else {

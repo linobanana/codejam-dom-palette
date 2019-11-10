@@ -1,4 +1,4 @@
-import { rgbToHex } from './colors.js';
+import { rgbToHex } from './colors';
 
 class Canvas {
   constructor(cellSize = 128) {

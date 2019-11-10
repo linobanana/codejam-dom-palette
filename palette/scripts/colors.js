@@ -1,4 +1,5 @@
-import { prevColor, currentColor } from './main.js'
+const currentColor = document.getElementById('current-color');
+const prevColor = document.querySelector('.prevColor');
 
 function rgbToHex(r, g, b) {
   if (r > 255 || g > 255 || b > 255) {
@@ -30,4 +31,6 @@ function setActiveTool(name) {
   }
 }
 
-export { rgbToHex, hex, setCurrentColor, setActiveTool };
+export {
+  rgbToHex, hex, setCurrentColor, setActiveTool, currentColor, prevColor,
+};

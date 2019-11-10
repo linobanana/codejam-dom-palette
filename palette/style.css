@@ -7,7 +7,6 @@
 .wrapper {
   display: flex;
   margin: 0 auto;
-  justify-content: space-between;
   flex-wrap: wrap;
   height: calc(100vh - 50px);
   align-items: center;
@@ -99,9 +98,9 @@
 }
 
 #canvas {
-  margin-right: 20px;
   border: 1px solid #000;
   align-self: center;
+  margin-left: 30%;
 }
 
 .active-colors {
