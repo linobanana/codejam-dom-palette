@@ -101,6 +101,7 @@
 #canvas {
   margin-right: 20px;
   border: 1px solid #000;
+  align-self: center;
 }
 
 .active-colors {
@@ -111,8 +112,4 @@
 .active-tool {
   opacity: 1;
   background-color: #f4f0f0;
-}
-
-#capture {
-  position: absolute;
 }
